@@ -359,18 +359,41 @@ Code.renderContent = function() {
     Code.attemptCodeGeneration(Blockly.JavaScript);
   } else if (content.id === 'content_python') {
     Code.attemptCodeGeneration(Blockly.Python);
-  } else if (content.id === 'content_php') {
-    Code.attemptCodeGeneration(Blockly.PHP);
-  } else if (content.id === 'content_dart') {
-    Code.attemptCodeGeneration(Blockly.Dart);
-  } else if (content.id === 'content_lua') {
-    Code.attemptCodeGeneration(Blockly.Lua);
   }
   if (typeof PR === 'object') {
     PR.prettyPrint();
   }
 };
+/**
+ * Attempt to generate the code and display it in the UI, pretty printed.
+ * @param code -- text code you want to save on a seperate file
+ * @param filename -- fileName of seperate text file
+ */
+Code.saveTextToFile = function(code, filename) {
+  var textFileAsBlob = new Blob([code], {type:'text/plain'});
+  var downloadLink = document.createElement("a");
+  downloadLink.download = filename;
+  downloadLink.innerHTML = "Download File";
+  if (window.webkitURL != null)
+  {
+      // Chrome allows the link to be clicked
+      // without actually adding it to the DOM.
+      downloadLink.href = window.webkitURL.createObjectURL(textFileAsBlob);
+  }
+  else
+  {
+      // Firefox requires the link to be added to the DOM
+      // before it can be clicked.
+      downloadLink.href = window.URL.createObjectURL(textFileAsBlob);
+      downloadLink.onclick = destroyClickedElement;
+      downloadLink.style.display = "none";
+      document.body.appendChild(downloadLink);
+  }
 
+  downloadLink.click();
+
+  alert("python text scraped and saved to: " + filename);
+}
 /**
  * Attempt to generate the code and display it in the UI, pretty printed.
  * @param generator {!Blockly.Generator} The generator to use.
@@ -380,6 +403,10 @@ Code.attemptCodeGeneration = function(generator) {
   content.textContent = '';
   if (Code.checkAllGeneratorFunctionsDefined(generator)) {
     var code = generator.workspaceToCode(Code.workspace);
+    if(content.id == 'content_python') {
+      // insert scraper here only for python case
+      Code.saveTextToFile(code, "python_runnable.py");
+    }
     content.textContent = code;
     // Remove the 'prettyprinted' class, so that Prettify will recalculate.
     content.className = content.className.replace('prettyprinted', '');
