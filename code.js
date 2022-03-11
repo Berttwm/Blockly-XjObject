@@ -405,7 +405,7 @@ Code.attemptCodeGeneration = function(generator) {
     var code = generator.workspaceToCode(Code.workspace);
     if(content.id == 'content_python') {
       // insert scraper here only for python case
-      Code.saveTextToFile(code, "python_runnable.py");
+      // Code.saveTextToFile(code, "python_runnable.py");
     }
     content.textContent = code;
     // Remove the 'prettyprinted' class, so that Prettify will recalculate.

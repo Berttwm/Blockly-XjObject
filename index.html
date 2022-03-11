@@ -12,7 +12,9 @@
   <script src="scripts/javascript_compressed.js"></script>
   <script src="scripts/python_compressed.js"></script>
   <script src="scripts/action_blocks.js"></script>
-  <script src="scripts/xjobject_block.js"></script>
+  <script src="scripts/xjobject_config.js"></script>
+  <script src="scripts/xjobject_creator.js"></script>
+  <script src="scripts/xjobject_evaluator.js"></script>
   <script src="code.js"></script>
 </head>
 <body>
@@ -70,6 +72,7 @@
   <pre id="content_python" class="content prettyprint lang-py"></pre>
   <textarea id="content_xml" class="content" wrap="off"></textarea>
   <textarea id="content_json" class="content" wrap="off"></textarea>
+  
   <xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
     <category name="Logic" colour="#5b80a5">
       <block type="controls_if"></block>
@@ -424,14 +427,21 @@
         </value>
       </block>
     </category>
-    <category name="XjObject" colour="#a55b80">
-      <block type="xjobject_op2"></block>
-      <block type="xjobject_op1"></block>
-      <block type="xjobjectcreator"></block>
+    <category name="XjObject Creator" colour="#009900">
+      <block type="xjobject_creator_type1"></block>
+      <block type="xjobject_creator_type2"></block>
+    </category>
+    <category name="XjObject Config" colour="#C7C706">
+      <block type="xjobject_config_init"></block>
+      <block type="xjobject_config_adder"></block>
+    </category>
+    <category name="XjObject Evaluator" colour="#990000">
+      <block type="xjobject_evaluator"></block>
     </category>
     <sep></sep>
     <category name="Variables" colour="#a55b80" custom="VARIABLE"></category>
     <category name="Functions" colour="#995ba5" custom="PROCEDURE"></category>
   </xml>
+
 </body>
 </html>
