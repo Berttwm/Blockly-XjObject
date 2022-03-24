@@ -95,7 +95,7 @@ Blockly.Python['xjobject_evaluator'] = function(block) {
       '\t\t\t\t\t\t'+'if(obj_key_value in range(value[0], value[1] + 1)):',
       '\t\t\t\t\t\t\t'+'matchCount+=1',
       '\t\t\t\t\t'+'if(matchCount != 0 and matchCount != len(curr_level_dict)):',
-      '\t\t\t\t\t\t'+'raise Exception("image object index ({}) has attribute values that are in different levels")',
+      '\t\t\t\t\t\t'+'raise Exception("image object index ({}) has attribute values that are in different levels".format(obj_idx))',
       '\t\t\t\t\t'+'elif(matchCount == len(curr_level_dict)):',
       '\t\t\t\t\t\t'+'isAssignedLevel = True',
       '\t\t\t\t\t\t'+'levels.append(i)',
