@@ -46,7 +46,10 @@ def xjobject_evaluator(config_list, image) :
 						break;
 					matchCount = 0;
 					for key,value in curr_level_dict.items():
-						obj_key_value = obj[key]
+						try:
+							obj_key_value = obj[key]
+						except Exception:
+							raise Exception("configuration list and image object does not have matching keys for attribute name: ({})".format(key))
 						errorCheckKey = key
 						if(obj_key_value in range(value[0], value[1] + 1)):
 							matchCount+=1
@@ -61,8 +64,10 @@ def xjobject_evaluator(config_list, image) :
 
 
 image1 = [
-{"object_type":1,"name":"car1","height":85,"width":15},
-{"object_type":2,"name":"person1","weight":50,"age":25}]
+{"object_type":1,"name":"car1","height":56,"width":46},
+{"object_type":1,"name":"car1","height":72,"width":64},
+{"object_type":1,"name":"car1","height":15,"width":15},
+{"object_type":2,"name":"person1","weight":25,"age":25}]
 config_list = [[
 1,{
   "height":(0,20),
@@ -83,14 +88,19 @@ config_list = [[
 ], [
 2,{
   "age":(0,10),
+  "weight":(0,10),
 },{
   "age":(11,20),
+  "weight":(11,20),
 },{
   "age":(21,30),
+  "weight":(21,30),
 },{
   "age":(31,40),
+  "weight":(31,40),
 },{
   "age":(41,1000),
+  "weight":(41,100),
 },
 ]]
 print(xjobject_evaluator(config_list,image1))
